@@ -13,8 +13,8 @@ function App() {
   const [input6, setInput6] = useState("IKZJEGN");
   const [input7, setInput7] = useState("xyzc");
   const [input8, setInput8] = useState("XZBF");
-  const [input9, setInput9] = useState("hello");
-  const [input10, setInput10] = useState("hello");
+  const [input9, setInput9] = useState("abzy");
+  const [input10, setInput10] = useState("abzy");
 
   const [key1, setKey1] = useState("2");
   const [key2, setKey2] = useState("2");
@@ -22,8 +22,8 @@ function App() {
   const [key6, setKey6] = useState("10");
   const [key7, setKey7] = useState("abcd");
   const [key8, setKey8] = useState("abcd");
-  const [key9, setKey9] = useState("monarchy");
-  const [key10, setKey10] = useState("monarchy");
+  const [key9, setKey9] = useState("");
+  const [key10, setKey10] = useState("");
 
   const [mul1, setMul1] = useState("7");
   const [mul2, setMul2] = useState("7");

@@ -121,23 +121,26 @@ const playFairCipher = function(p,k) {
     const getCol = (x) => charOrder(x)%5;
     p = p.toUpperCase();
     let p2='';
-    for (let i=0;i<p.length/2;i+=2){
+    console.log(p2,p.length);
+    let i=0
+    while(i<p.length-1){
         p2+=p[i];
         if(p[i]==p[i+1]){
             p2+='X';
             i--;
         }
         else p2+=p[i+1];
+        i+=2;
     }
+
 
     if(p2.length%2 == 1)p2+='X';
     p=p2;
-    console.log(p);
     let matrix = k + "abcdefghiklmnopqrstuvwxyz"
     matrix = matrix.toUpperCase();
     matrix = removeDublicates(matrix);
     let c = '';
-    for (let i=0;i<p.length/2;i+=2){
+    for (let i=0;i<i<p.length-1;i+=2){
         if(getRow(p[i])==getRow(p[i+1])){
             if(getCol(p[i])==4) c += matrix[getRow(p[i])*5]
             else c += matrix[getRow(p[i])*5+getCol(p[i])+1]
@@ -160,13 +163,18 @@ const playFairCipher = function(p,k) {
     return c;
 }
 
+console.log(playFairCipher('xyyz',''));
+
+
+
+
 const playFairDecipher = function(p,k) {
     const charOrder = (c) => (c.toUpperCase()<'J')?c.toUpperCase().charCodeAt(0)-65:c.toUpperCase().charCodeAt(0)-65-1;
     const getRow = (x) => Math.floor(charOrder(x)/5);
     const getCol = (x) => charOrder(x)%5;
     p = p.toUpperCase();
     let p2='';
-    for (let i=0;i<p.length/2+2;i+=2){
+    for (let i=0;i<p.length/2+1;i+=2){
         p2+=p[i];
         if(p[i]==p[i+1]){
             p2+='X';
@@ -181,7 +189,7 @@ const playFairDecipher = function(p,k) {
     matrix = matrix.toUpperCase();
     matrix = removeDublicates(matrix);
     let c = '';
-    for (let i=0;i<p.length/2;i+=2){
+    for (let i=0;i<p.length/2+1;i+=2){
         if(getRow(p[i])==getRow(p[i+1])){
             if(getCol(p[i])==0) c += matrix[getRow(p[i])*5+4]
             else c += matrix[getRow(p[i])*5+getCol(p[i])-1]
@@ -203,4 +211,4 @@ const playFairDecipher = function(p,k) {
     }
     return c;
 }
-console.log(playFairCipher('wxab',''));
+

@@ -18,7 +18,7 @@ String.prototype.insert = function(index, string) {
 const modInverse = function(a, b=26) {
     a %= b;
     for (let x = 1; x < b; x++) {
-        if ((a*x)%b == 1) {
+        if ((a*x)%b === 1) {
             return x;
         }
     }
@@ -86,7 +86,7 @@ export const affineDecipher = function(p,m,k) {
 }
 
 export const vigenereCipher = function(p,k="A") {
-    if(k=="")k="A";
+    if(k==="")k="A";
     p = p.toUpperCase();
     k = k.toUpperCase();
     let c = ''
@@ -101,7 +101,7 @@ export const vigenereCipher = function(p,k="A") {
 }
 
 export const vigenereDecipher = function(p,k="A") {
-    if(k=="")k="A";
+    if(k==="")k="A";
     p = p.toUpperCase();
     k = k.toUpperCase();
     let c = ''
@@ -121,28 +121,33 @@ export const playFairCipher = function(p,k) {
     const getCol = (x) => charOrder(x)%5;
     p = p.toUpperCase();
     let p2='';
-    for (let i=0;i<p.length-1;i++){
+    for (let i=0;i<p.length/2+1;i+=2){
         p2+=p[i];
-        if(p[i]==p[i+1])p2+='X';
+        if(p[i]===p[i+1]){
+            p2+='X';
+            i--;
+        }
+        else p2+=p[i+1];
+        console.log(p2);
     }
-    p2 += p.slice(-1)
-    if(p2.length%2 == 1)p2+='X';
+
+    if(p2.length%2 === 1)p2+='X';
     p=p2;
     let matrix = k + "abcdefghiklmnopqrstuvwxyz"
     matrix = matrix.toUpperCase();
     matrix = removeDublicates(matrix);
     let c = '';
-    for (let i=0;i<p.length/2;i+=2){
-        if(getRow(p[i])==getRow(p[i+1])){
-            if(getCol(p[i])==4) c += matrix[getRow(p[i])*5]
+    for (let i=0;i<p.length/2+1;i+=2){
+        if(getRow(p[i])===getRow(p[i+1])){
+            if(getCol(p[i])===4) c += matrix[getRow(p[i])*5]
             else c += matrix[getRow(p[i])*5+getCol(p[i])+1]
-            if(getCol(p[i+1])==4) c += matrix[getRow(p[i+1])*5]
+            if(getCol(p[i+1])===4) c += matrix[getRow(p[i+1])*5]
             else c += matrix[getRow(p[i+1])*5+getCol(p[i+1])+1]
         }
-        else if(getCol(p[i])==getCol(p[i+1])){
-            if(getRow(p[i])==4) c += matrix[getCol(p[i+1])]
+        else if(getCol(p[i])===getCol(p[i+1])){
+            if(getRow(p[i])===4) c += matrix[getCol(p[i+1])]
             else c += matrix[getRow(p[i])*5+getCol(p[i])+5]
-            if(getRow(p[i+1])==4) c += matrix[getCol(p[i+1])]
+            if(getRow(p[i+1])===4) c += matrix[getCol(p[i+1])]
             else c += matrix[getRow(p[i+1])*5+getCol(p[i+1])+5]
         }
         else{
@@ -155,34 +160,42 @@ export const playFairCipher = function(p,k) {
     return c;
 }
 
+
+
+
+
 export const playFairDecipher = function(p,k) {
     const charOrder = (c) => (c.toUpperCase()<'J')?c.toUpperCase().charCodeAt(0)-65:c.toUpperCase().charCodeAt(0)-65-1;
     const getRow = (x) => Math.floor(charOrder(x)/5);
     const getCol = (x) => charOrder(x)%5;
     p = p.toUpperCase();
     let p2='';
-    for (let i=0;i<p.length-1;i++){
+    for (let i=0;i<p.length/2+1;i+=2){
         p2+=p[i];
-        if(p[i]==p[i+1])p2+='X';
+        if(p[i]===p[i+1]){
+            p2+='X';
+            i--;
+        }
+        else p2+=p[i+1];
     }
-    p2 += p.slice(-1)
-    if(p2.length%2 == 1)p2+='X';
+
+    if(p2.length%2 === 1)p2+='X';
     p=p2;
     let matrix = k + "abcdefghiklmnopqrstuvwxyz"
     matrix = matrix.toUpperCase();
     matrix = removeDublicates(matrix);
     let c = '';
-    for (let i=0;i<p.length/2;i+=2){
-        if(getRow(p[i])==getRow(p[i+1])){
-            if(getCol(p[i])==0) c += matrix[getRow(p[i])*5+4]
+    for (let i=0;i<p.length/2+1;i+=2){
+        if(getRow(p[i])===getRow(p[i+1])){
+            if(getCol(p[i])===0) c += matrix[getRow(p[i])*5+4]
             else c += matrix[getRow(p[i])*5+getCol(p[i])-1]
-            if(getCol(p[i+1])==0) c += matrix[getRow(p[i+1])*5+4]
+            if(getCol(p[i+1])===0) c += matrix[getRow(p[i+1])*5+4]
             else c += matrix[getRow(p[i+1])*5+getCol(p[i+1])-1]
         }
-        else if(getCol(p[i])==getCol(p[i+1])){
-            if(getRow(p[i])==0) c += matrix[getCol(p[i+1])+20]
+        else if(getCol(p[i])===getCol(p[i+1])){
+            if(getRow(p[i])===0) c += matrix[getCol(p[i+1])+20]
             else c += matrix[getRow(p[i])*5+getCol(p[i])-5]
-            if(getRow(p[i+1])==0) c += matrix[getCol(p[i+1])+20]
+            if(getRow(p[i+1])===0) c += matrix[getCol(p[i+1])+20]
             else c += matrix[getRow(p[i+1])*5+getCol(p[i+1])-5]
         }
         else{
