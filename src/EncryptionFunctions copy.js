@@ -132,7 +132,7 @@ const playFairCipher = function(p,k) {
         else p2+=p[i+1];
         i+=2;
     }
-
+    console.log(p2);
 
     if(p2.length%2 == 1)p2+='X';
     p=p2;
@@ -140,7 +140,7 @@ const playFairCipher = function(p,k) {
     matrix = matrix.toUpperCase();
     matrix = removeDublicates(matrix);
     let c = '';
-    for (let i=0;i<i<p.length-1;i+=2){
+    for (let i=0;i<p.length-1;i+=2){
         if(getRow(p[i])==getRow(p[i+1])){
             if(getCol(p[i])==4) c += matrix[getRow(p[i])*5]
             else c += matrix[getRow(p[i])*5+getCol(p[i])+1]
@@ -163,7 +163,7 @@ const playFairCipher = function(p,k) {
     return c;
 }
 
-console.log(playFairCipher('xyyz',''));
+console.log(playFairCipher('helllo',''));
 
 
 
